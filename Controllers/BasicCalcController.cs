@@ -15,6 +15,7 @@ public class BasicCalcController : ControllerBase
         _logger = logger;
     }
 
+    // ADD METHOD
     [HttpPost("Add/{Number1}/{Number2}")]
     public IActionResult Add(int Number1, int Number2)
     {
@@ -22,25 +23,38 @@ public class BasicCalcController : ControllerBase
         return Ok(result);
     }
 
-
-
-[HttpPost("Subtract/{value}/{value1}")]
-    public IActionResult Subtract([FromBody] Calculation request)
+    // SUBTRACT METHOD
+    [HttpPost("Subtract/{Number1}/{Number2}")]
+    public IActionResult Subtract(int Number1, int Number2)
     {
-        int result = request.Value - request.Value1;
-        return Ok(result);
-    }
-    [HttpPost("Multiply")]
-    public IActionResult Multiply([FromBody] Calculation request)
-    {
-        int result = request.Value * request.Value1;
+        int result = Number1 - Number2;
         return Ok(result);
     }
 
-    [HttpPost("Divide/{value}/{value1}")]
-    public IActionResult Divide([FromBody] Calculation request)
+    // MULTIPLY METHOD
+    [HttpPost("Multiply/{Number1}/{Number2}")]
+    public IActionResult Multiply(int Number1, int Number2)
     {
-        int result = request.Value / request.Value1;
+        int result = Number1 * Number2;
         return Ok(result);
     }
+
+    // INT DIVIDE METHOD
+    [HttpPost("Divide/Integer/{Number1}/{Number2}")]
+    public IActionResult DivideInteger(int Number1, int Number2)
+    {
+        int result = Number1 / Number2;
+        return Ok(result);
+    }
+
+    // DECIMAL DIVIDE METHOD
+    [HttpPost("Divide/Decimal/{Number1}/{Number2}")]
+    public IActionResult DivideDecimal(double Number1, double Number2)
+    {
+        double result = Number1 / Number2;
+        return Ok(result);
+    }
+
+
 }
+
