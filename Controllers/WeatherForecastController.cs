@@ -1,32 +1,44 @@
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace Calculator_API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class CalcController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
 
-    private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ILogger<CalcController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public CalcController(ILogger<CalcController> logger)
     {
         _logger = logger;
     }
 
-    [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    [HttpPost("Add")]
+    public IActionResult Add([FromBody] Calculation request)
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        {
-            Date = DateTime.Now.AddDays(index),
-            TemperatureC = Random.Shared.Next(-20, 55),
-            Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-        })
-        .ToArray();
+        int result = request.Value + request.Value1;
+        return Ok(result);
+    }
+
+    [HttpPost("Subtract")]
+    public IActionResult Subtract([FromBody] Calculation request)
+    {
+        int result = request.Value - request.Value1;
+        return Ok(result);
+    }
+    [HttpPost("Multiply")]
+    public IActionResult Multiply([FromBody] Calculation request)
+    {
+        int result = request.Value * request.Value1;
+        return Ok(result);
+    }
+
+    [HttpPost("Divide")]
+    public IActionResult Divide([FromBody] Calculation request)
+    {
+        int result = request.Value / request.Value1;
+        return Ok(result);
     }
 }
