@@ -1,6 +1,6 @@
 # Calculator-API
 
-Welcome to the Calculator API. This API provides a set of endpoints to perform various mathematical and financial calculations. It is built using .NET Core and is designed to be simple and easy to use.
+Welcome to the Calculator API. This API provides a set of endpoints to perform various mathematical and financial calculations. It is built using ASP .NET Core and is designed to be simple and easy to use.
 
 
 To use this API, make HTTP POST requests to the specified endpoints. The API will process your requests and return results in JSON format. Below, you will find details on how to use each type of calculation and examples to help you get started.
