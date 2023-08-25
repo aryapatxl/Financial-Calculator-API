@@ -7,7 +7,7 @@ namespace Calculator_API.Controllers;
 [Route("[controller]")]
 
 public class Financial_CalculationsController : ControllerBase
-    {
+{
     private readonly ILogger<Financial_CalculationsController> _logger;
 
     public Financial_CalculationsController(ILogger<Financial_CalculationsController> logger)
@@ -31,7 +31,7 @@ public class Financial_CalculationsController : ControllerBase
     {
         double result = 1 + (Yearly_Interest_Rate / Amt_Compounding_Yearly);
         double exp = Years * Amt_Compounding_Yearly;
-        double total = Principal_Amount * (Math.Pow(result,exp));
+        double total = Principal_Amount * (Math.Pow(result, exp));
         total = Math.Round(total, 2);
         string formattedTotal = $"${total}";
 
@@ -46,8 +46,43 @@ public class Financial_CalculationsController : ControllerBase
         double result = PricePerShare / EarningsPerShare;
         result = Math.Round(result, 2);
         string formattedTotal = $"${result}";
-        
+
         return Ok(formattedTotal);
     }
+
+    // TIME TO DOUBLE YOUR MONEY
+    [HttpPost("TimeToDoubleMoney/{InterestRate}")]
+    public IActionResult TimeToDoubleMoney(double InterestRate)
+    {
+        double result = 72 / InterestRate;
+        result = Math.Round(result, 2);
+        string formattedTotal = $"${result}";
+
+        return Ok(formattedTotal);
+    }
+
+    // FUTURE VALUE WITH CONTINUOUS COMPOUNDING
+    [HttpPost("FVContinuousCompounding/{PresentValue}/{InterestRate}/{Time}")]
+    public IActionResult FVContinuousCompounding(double PresentValue, double InterestRate, int Time)
+    {
+        double result = PresentValue * (Math.Exp(InterestRate * Time));
+        result = Math.Round(result, 2);
+        string formattedTotal = $"${result}";
+
+        return Ok(formattedTotal);
+    }
+
+    // FUTURE VALUE GENERAL GROWTH RATE
+    [HttpPost("FVGeneralGrowthRate/{PresentValue}/{GrowthRate}/{Time}")]
+    public IActionResult FVGeneralGrowthRate(double PresentValue, double GrowthRate, int Time)
+    {
+        double result = PresentValue * (Math.Pow((1+GrowthRate),Time));
+        result = Math.Round(result, 2);
+        string formattedTotal = $"${result}";
+
+        return Ok(formattedTotal);
+    }
+
+
 }
 
